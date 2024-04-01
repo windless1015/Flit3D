@@ -173,7 +173,7 @@ void TrackballWidget::initializeGL()
     // Setup our vertex buffer object.
     m_vbo.create();
     m_vbo.bind();
-    m_vbo.allocate(m_mesh.constData(), m_mesh.getCount() * sizeof(GLfloat));
+    m_vbo.allocate(m_mesh.constData(), static_cast<int>(m_mesh.getCount() * sizeof(GLfloat)));
 
     // Store the vertex attribute bindings for the program.
     setupVertexAttribs();

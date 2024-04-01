@@ -16,26 +16,39 @@ find_package(Qt5 COMPONENTS Widgets Core Gui REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(OpenMesh REQUIRED)
 
-include_directories(${OpenMesh_INCLUDE_DIRS})
+#header include directory
 include_directories(${OPENGL_INCLUDE_DIRS})
 
+#src code files
 add_executable(TrackBall 
     main.cpp
     TrackballWidget.h
     TrackballWidget.cpp
     Mesh.h
     Mesh.cpp
-    #OpenMeshWrapper.h
     )
 
-if(CMAKE_VERSION VERSION_LESS "3.7.0")
-    set(CMAKE_INCLUDE_CURRENT_DIR ON)
-endif()
+set(OPENMESH_LIB_DEBUG 
+    OpenMeshCored
+    OpenMeshToolsd
+)
 
-target_link_libraries(TrackBall 
+set(OPENMESH_LIB_RELEASE 
+    OpenMeshCore
+    OpenMeshTools
+)
+
+#link lib directory
+TARGET_LINK_DIRECTORIES(${CMAKE_PROJECT_NAME} PUBLIC
+    "C:/Program Files/OpenMesh 10.0/lib"
+)
+
+#link libs 
+TARGET_LINK_LIBRARIES(TrackBall 
     Qt5::Widgets 
     Qt5::Core 
     Qt5::Gui
-    OpenMeshCore 
-    OpenMeshTools 
-    ${OPENGL_LIBRARIES})
+    debug ${OPENMESH_LIB_DEBUG}
+    optimized ${OPENMESH_LIB_RELEASE}
+    ${OPENGL_LIBRARIES}
+)

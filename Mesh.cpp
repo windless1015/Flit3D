@@ -1,5 +1,6 @@
 #include "Mesh.h"
 
+#include <OpenMesh/Core/IO/MeshIO.hh>
 Mesh::Mesh()
 {
 
@@ -27,7 +28,7 @@ void Mesh::readMesh(std::string fileName)
         m_verticesVector.push_back(p[1]); // y-coordinate
         m_verticesVector.push_back(p[2]); // z-coordinate
     }
-
+    int a = m_mesh.n_vertices();
     //std::cout << "Loaded " << vertices.size() / 3 << " vertices." << std::endl;
 }
 
